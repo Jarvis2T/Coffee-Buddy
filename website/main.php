@@ -9,7 +9,7 @@
 	<div id="conBottomfooter">
 	<div id="conBackgroundImg">
 		<?php 
-			include('../admin/modules/dbcon.php');
+			include('modules/dbcon.php');
 			include('modules/header.php');
 			include('modules/content.php');
 			include('modules/footer.php');
