@@ -11,7 +11,7 @@
 
 	<div id="left">	
 		<div id="lefttop">
-			<img src="../admin/modules/coffeemanagement/uploads/<?php echo $row['coffeeimg'] ?>" height="380" width="380">
+			<img src="admin/modules/coffeemanagement/uploads/<?php echo $row['coffeeimg'] ?>" height="380" width="380">
 		</div>
 
 		<div id="leftbottom">
