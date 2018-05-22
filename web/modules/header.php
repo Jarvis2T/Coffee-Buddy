@@ -1,7 +1,7 @@
 <header id="mainhead">
 	<nav>
 		<ul>
-			<li><a href="../admin/index.php">Admin</a></li>
+			<li><a href="admin/index.php">Admin</a></li>
 			<li><a href="main.php?p=recipes">Recipes</a></li>
 			<li><a href="main.php?p=about">About</a></li>
 			<li><a href="index.php">Home</a></li>
