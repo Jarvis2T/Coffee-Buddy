@@ -27,7 +27,8 @@
 				'SourceFile' => $coffeeimg_tmp,
 				'StorageClass' => 'REDUCED_REDUNDANCY'
 	
-
+			)
+		);
 
 	$id=$_GET['id'];
 	$coffeename=$_POST['coffeename'];
