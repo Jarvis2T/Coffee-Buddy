@@ -1,5 +1,6 @@
 <?php 
 	include('../dbcon.php');
+	s3Client.
 	require '../../../../vendor/autoload.php';
 	$bucketName = 'thanh-img';
 	$IAM_KEY = 'AKIAJBMLP3OFGJPWRD3Q';
@@ -7,7 +8,8 @@
 	use Aws\S3\S3Client;
 	use Aws\S3\Exception\S3Exception;
 	try {
-		$s3 = S3Client::factory(
+		$s3 = new S3Client(['signature' => 'v4']);
+		$s3::factory(
 			array(
 				'credentials' => array(
 					'key' => $IAM_KEY,
@@ -29,7 +31,7 @@
 	try {
 		// Uploaded:
 		$coffeeimg_tmp=$_FILES['coffeeimg']['tmp_name'];
-		
+
 		$s3->putObject(
 			array(
 				'Bucket'=>$bucketName,
