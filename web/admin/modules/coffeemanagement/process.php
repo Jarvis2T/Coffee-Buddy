@@ -32,7 +32,12 @@
 	$keyName = basename($coffeeimg);
 	$pathInS3 = 'https://s3.amazonaws.com/' . $bucketName . '/' . $keyName;
 
-	try {
+	
+	if (isset($_POST['add'])) {
+		
+		# add method
+		
+		try {
 			$coffeeimg_tmp=$_FILES['coffeeimg']['tmp_name'];
 
         	$s3->putObject(
@@ -45,12 +50,7 @@
         	);
         } catch (Exeption $e) {
         	echo $e->getMessage();
-        }
-	
-	if (isset($_POST['add'])) {
-		
-		# add method
-		
+        }			
 
 		$sql="INSERT INTO coffee (coffeename,coffeeimg,description) VALUES ('$coffeename','$coffeeimg','$description')";
 
