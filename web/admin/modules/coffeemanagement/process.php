@@ -1,5 +1,7 @@
 <?php 
 	include('../dbcon.php');
+	require('../../../../vendor/autoload.php');
+	use Aws\S3\Exeption\S3Exeption;
 	$coffeeimg=$_FILES['coffeeimg']['name'];
 	$coffeeimg_tmp=$_FILES['coffeeimg']['tmp_name'];
 	move_uploaded_file($coffeeimg_tmp,'uploads/'.$coffeeimg);
@@ -11,6 +13,17 @@
 		
 		# add method
 		
+		try {
+			$s3->putObject([
+				'Bucket' => "thanh-img",
+				'Key' => $coffeeimg,
+				'Body' => fopen($coffeeimg_tmp, 'rb'),
+				'ACL' => 'public-read'
+			]);
+		} catch (S3Exeption $e) {
+			die("Error");
+		}
+
 		$sql="INSERT INTO coffee (coffeename,coffeeimg,description) VALUES ('$coffeename','$coffeeimg','$description')";
 
 		mysqli_query($db,$sql);
