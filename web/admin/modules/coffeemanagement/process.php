@@ -1,28 +1,42 @@
 <?php 
 	include('../dbcon.php');
-	require('../../../../vendor/autoload.php');
-	use Aws\S3\Exeption\S3Exeption;
 	$coffeeimg=$_FILES['coffeeimg']['name'];
 	$coffeeimg_tmp=$_FILES['coffeeimg']['tmp_name'];
 	move_uploaded_file($coffeeimg_tmp,'uploads/'.$coffeeimg);
 	$id=$_GET['id'];
 	$coffeename=$_POST['coffeename'];
 	$description=$_POST['description'];
+
+		// connect to s3
+	require('../../../../vendor/autoload.php');
+	$s3 = Aws\S3\S3Client::factory(
+    	array(
+        	'credentials' => array(
+            'key' => $_ENV["AWS_ACCESS_KEY_ID"],
+            'secret' => $_ENV["AWS_SECRET_ACCESS_KEY"]
+        	),
+        'version' => 'latest',
+        'region' => 'us-east-1'
+   		)    
+	);
+	$bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!');
 	
 	if (isset($_POST['add'])) {
 		
 		# add method
 		
 		try {
-			$s3->putObject([
-				'Bucket' => "thanh-img",
-				'Key' => $coffeeimg,
-				'Body' => fopen($coffeeimg_tmp, 'rb'),
-				'ACL' => 'public-read'
-			]);
-		} catch (S3Exeption $e) {
-			die("Error");
-		}
+        	$upload = $s3->putObject(
+	            array(
+		            'Bucket' => $bucket,
+		            'Key' => basename($coffeeimg),
+		            'SourceFile' => $coffeeimg_tmp,
+		            'ACL' => 'public-read'
+	           	)
+        	);
+        } catch (Exeption $e) {
+        	echo $e->getMessage();
+        }
 
 		$sql="INSERT INTO coffee (coffeename,coffeeimg,description) VALUES ('$coffeename','$coffeeimg','$description')";
 
