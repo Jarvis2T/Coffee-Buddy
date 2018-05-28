@@ -9,7 +9,7 @@
 
 	<a href="main.php?p=recipedetails&id=<?php echo($row['id_coffee']) ?>" class="hover" >
 		<div class="recipelist">
-			<img src="https://s3.us-east-1.amazonaws.com/thanh-img/<?php echo($row['coffeeimg'])?>">
+			<img src="https://s3.amazonaws.com/thanh-img2/<?php echo($row['coffeeimg'])?>">
 			<h2><?php echo($row['coffeename']) ?></h2>
 			<p><?php echo($row['description']); ?></p>
 		</div>
