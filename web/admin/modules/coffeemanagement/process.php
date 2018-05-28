@@ -9,26 +9,36 @@
 
 		// connect to s3
 	require('../../../../vendor/autoload.php');
-	$s3 = Aws\S3\S3Client::factory(
-    	array(
-        	'credentials' => array(
-            'key' => $_ENV["AWS_ACCESS_KEY_ID"],
-            'secret' => $_ENV["AWS_SECRET_ACCESS_KEY"]
-        	),
-        'version' => 'latest',
-        'region' => 'us-east-1'
-   		)    
-	);
-	$bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!');
+	use Aws\S3\S3Client;
+	use Aws\S3\Exception\S3Exception;
+
+	$bucketName = $_ENV["S3_BUCKET"];
+	$IAM_KEY = $_ENV["AWS_ACCESS_KEY_ID"];
+	$IAM_SECRET = $_ENV["AWS_SECRET_ACCESS_KEY"];
+
+	try {
+		$s3 = S3Client::factory(
+	    	array(
+	        	'credentials' => array(
+	            'key' => $_ENV["AWS_ACCESS_KEY_ID"],
+	            'secret' => $_ENV["AWS_SECRET_ACCESS_KEY"]
+	        	),
+	        'version' => 'latest',
+	        'region' => 'us-east-1'
+	   		)    
+		);
+	} catch (Exeption $e) {
+		echo $e->getMessage();
+	}
 	
 	if (isset($_POST['add'])) {
 		
 		# add method
 		
 		try {
-        	$upload = $s3->putObject(
+        	$s3->putObject(
 	            array(
-		            'Bucket' => $bucket,
+		            'Bucket' => $bucketName,
 		            'Key' => basename($coffeeimg),
 		            'SourceFile' => $coffeeimg_tmp,
 		            'ACL' => 'public-read'
