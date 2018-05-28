@@ -3,7 +3,7 @@
 
 	$coffeeimg=$_FILES['coffeeimg']['name'];
 	
-	move_uploaded_file($coffeeimg_tmp,'uploads/'.$coffeeimg);
+	//move_uploaded_file($coffeeimg_tmp,'uploads/'.$coffeeimg);
 
 	$id=$_GET['id'];
 	$coffeename=$_POST['coffeename'];
@@ -29,7 +29,7 @@
 	   		)    
 		);
 
-	$keyName = 'test_example/' . basename($coffeeimg_tmp);
+	$keyName = basename($coffeeimg);
 	$pathInS3 = 'https://s3.amazonaws.com/' . $bucketName . '/' . $keyName;
 
 	try {
