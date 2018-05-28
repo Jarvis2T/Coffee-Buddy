@@ -1,8 +1,10 @@
 <?php 
 	include('../dbcon.php');
+
 	$coffeeimg=$_FILES['coffeeimg']['name'];
 	$coffeeimg_tmp=$_FILES['coffeeimg']['tmp_name'];
 	move_uploaded_file($coffeeimg_tmp,'uploads/'.$coffeeimg);
+
 	$id=$_GET['id'];
 	$coffeename=$_POST['coffeename'];
 	$description=$_POST['description'];
@@ -16,7 +18,6 @@
 	$IAM_KEY = $_ENV["AWS_ACCESS_KEY_ID"];
 	$IAM_SECRET = $_ENV["AWS_SECRET_ACCESS_KEY"];
 
-	try {
 		$s3 = S3Client::factory(
 	    	array(
 	        	'credentials' => array(
@@ -27,16 +28,13 @@
 	        'region' => 'us-east-1'
 	   		)    
 		);
-	} catch (Exeption $e) {
-		echo $e->getMessage();
-	}
 
 	try {
         	$s3->putObject(
 	            array(
 		            'Bucket' => $bucketName,
-		            'Key' => basename($coffeeimg),
-		            'SourceFile' => $coffeeimg_tmp,
+		            'Key' => basename($_FILES['coffeeimg']['name']),
+		            'SourceFile' => $_FILES['coffeeimg']['tmp_name'],
 		            'ACL' => 'public-read'
 	           	)
         	);
