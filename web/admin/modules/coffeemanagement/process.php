@@ -2,7 +2,7 @@
 	include('../dbcon.php');
 
 	$coffeeimg=$_FILES['coffeeimg']['name'];
-	$coffeeimg_tmp=$_FILES['coffeeimg']['tmp_name'];
+	
 	move_uploaded_file($coffeeimg_tmp,'uploads/'.$coffeeimg);
 
 	$id=$_GET['id'];
@@ -29,12 +29,17 @@
 	   		)    
 		);
 
+	$keyName = 'test_example/' . basename($coffeeimg_tmp);
+	$pathInS3 = 'https://s3.amazonaws.com/' . $bucketName . '/' . $keyName;
+
 	try {
+			$coffeeimg_tmp=$_FILES['coffeeimg']['tmp_name'];
+
         	$s3->putObject(
 	            array(
 		            'Bucket' => $bucketName,
-		            'Key' => basename($_FILES['coffeeimg']['name']),
-		            'SourceFile' => $_FILES['coffeeimg']['tmp_name'],
+		            'Key' => $keyName,
+		            'SourceFile' => $coffeeimg_tmp,
 		            'ACL' => 'public-read'
 	           	)
         	);
