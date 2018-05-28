@@ -16,7 +16,7 @@
 
 		<tr>
 			<td>Image</td>
-			<td><input type="file" name="coffeeimg"><img src="modules/coffeemanagement/uploads/<?php echo $row['coffeeimg'] ?>" width="80" height="80"></td>
+			<td><input type="file" name="coffeeimg"><img src="https://s3.amazonaws.com/thanh-img2/<?php echo $row['coffeeimg'] ?>" width="80" height="80"></td>
 		</tr>
 
 		<tr>

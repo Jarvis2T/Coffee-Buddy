@@ -16,7 +16,7 @@
 		<tr>
 			<td><?php echo $row['coffeename'] ?></td>
 			<td>
-				<img src="modules/coffeemanagement/uploads/<?php echo $row['coffeeimg'] ?>" width="80" height="80">
+				<img src="https://s3.amazonaws.com/thanh-img2/<?php echo $row['coffeeimg'] ?>" width="80" height="80">
 			</td>
 			<td><textarea name="description" cols="73" rows="5"><?php echo $row['description'] ?></textarea></td>
 			<td><a href="index.php?management=coffeemanagement&pc=edit&id=<?php echo $row['id_coffee'] ?>">Edit</a></td>

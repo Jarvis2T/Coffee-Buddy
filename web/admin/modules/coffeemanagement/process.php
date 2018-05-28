@@ -2,9 +2,6 @@
 	include('../dbcon.php');
 
 	$coffeeimg=$_FILES['coffeeimg']['name'];
-	
-	//move_uploaded_file($coffeeimg_tmp,'uploads/'.$coffeeimg);
-
 	$id=$_GET['id'];
 	$coffeename=$_POST['coffeename'];
 	$description=$_POST['description'];
