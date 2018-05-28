@@ -30,12 +30,8 @@
 	} catch (Exeption $e) {
 		echo $e->getMessage();
 	}
-	
-	if (isset($_POST['add'])) {
-		
-		# add method
-		
-		try {
+
+	try {
         	$s3->putObject(
 	            array(
 		            'Bucket' => $bucketName,
@@ -47,6 +43,11 @@
         } catch (Exeption $e) {
         	echo $e->getMessage();
         }
+	
+	if (isset($_POST['add'])) {
+		
+		# add method
+		
 
 		$sql="INSERT INTO coffee (coffeename,coffeeimg,description) VALUES ('$coffeename','$coffeeimg','$description')";
 
