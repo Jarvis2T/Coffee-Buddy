@@ -11,7 +11,7 @@
 
 	<div id="left">	
 		<div id="lefttop">
-			<img src="https://s3.amazonaws.com/thanh-img2/<?php echo $row['coffeeimg'] ?>" height="380" width="380">
+			<img src="https://s3.amazonaws.com/thanh-img2/<?php echo($row['coffeeimg'])?>" height="380" width="380">
 		</div>
 
 		<div id="leftbottom">
