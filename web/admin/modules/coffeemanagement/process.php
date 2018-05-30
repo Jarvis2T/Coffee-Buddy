@@ -12,7 +12,7 @@
 		# Connect to s3 service
 	 
 	$coffeeimg=basename($_FILES['coffeeimg']['name']);
-	$coffeeimg_tmp=$_FILES['coffeeimg']['tmp_name'];
+	
 	#$keyName = basename($coffeeimg);
 	$bucketName = $_ENV["S3_BUCKET"];
 	$IAM_KEY = $_ENV["AWS_ACCESS_KEY_ID"];
@@ -44,13 +44,13 @@
 		
 		# upload image to s3
 		try {
-			$keyName_tmp=$coffeeimg_tmp;
+			$coffeeimg_tmp=$_FILES['coffeeimg']['tmp_name'];
 
         	$s3->putObject(
 	            array(
 		            'Bucket' => $bucketName,
 		            'Key' => $coffeeimg,
-		            'SourceFile' => $keyName_tmp,
+		            'SourceFile' => $coffeeimg_tmp,
 		            'ACL' => 'public-read'
 	           	)
         	);
