@@ -1,17 +1,18 @@
 <?php 
 	include('../dbcon.php');
 	include('../functions.php');
-	$coffeeimg=basename($_FILES['coffeeimg']['name']);
-	$coffeeimg_tmp=$_FILES['coffeeimg']['tmp_name'];
+	
 	$id=$_GET['id'];
 	$coffeename=$_POST['coffeename'];
 	$description=$_POST['description'];
 
 		// connect to s3
-	require('../../../../vendor/autoload.php');
+	include('../../../../vendor/autoload.php');
 	use Aws\S3\S3Client;
 	use Aws\S3\Exception\S3Exception;
 
+	$coffeeimg=basename($_FILES['coffeeimg']['name']);
+	$coffeeimg_tmp=$_FILES['coffeeimg']['tmp_name'];
 	$bucketName = $_ENV["S3_BUCKET"];
 	$IAM_KEY = $_ENV["AWS_ACCESS_KEY_ID"];
 	$IAM_SECRET = $_ENV["AWS_SECRET_ACCESS_KEY"];
@@ -31,8 +32,6 @@
 	if (isset($_POST['add'])) {
 		
 		try {
-			
-
         	$s3->putObject(
 	            array(
 		            'Bucket' => $bucketName,
@@ -52,8 +51,6 @@
 	}elseif (isset($_POST['edit'])) {
 		
 		try {
-		
-
         	$s3->putObject(
 	            array(
 		            'Bucket' => $bucketName,
