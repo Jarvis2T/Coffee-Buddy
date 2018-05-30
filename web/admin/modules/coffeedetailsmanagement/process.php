@@ -1,4 +1,5 @@
-<?php 
+<?php
+	include('../functions.php');
 	include('../dbcon.php');
 	$id=$_GET['id'];
 	$id_coffee=$_POST['id_coffee'];
@@ -13,27 +14,18 @@
 		
 		# add method
 		
-		$sql="INSERT INTO coffeedetails (id_coffee,pretime,difficulty,ingredient1,ingredient2,extra,instruction1,instruction2) VALUES ('$id_coffee','$pretime','$difficulty','$ingredient1','$ingredient2','$extra','$instruction1','$instruction2')";
-
-		mysqli_query($db,$sql);
-		header('location:../../index.php?management=coffeedetailsmanagement&pc=add');
+		addcoffeedetails($id_coffee,$pretime, $difficulty, $ingredient1, $ingredient2, $extra, $instruction1, $instruction2);
 		
 	}elseif (isset($_POST['edit'])) {
 		
 		# edit method
 	
-		$sql="UPDATE coffeedetails SET pretime='$pretime',difficulty='$difficulty',ingredient1='$ingredient1',ingredient2='$ingredient2',extra='$extra',instruction1='$instruction1',instruction2='$instruction2' WHERE id_coffee = '$id'";
-
-		mysqli_query($db,$sql);
-		header('location:../../index.php?management=coffeedetailsmanagement&pc=edit&id='.$id);
+		editcoffeedetails($pretime, $difficulty, $ingredient1, $ingredient2, $extra, $instruction1, $instruction2,$id);
 
 	}else {
 		
 		# delete method
 		
-		$sql="DELETE FROM coffeedetails WHERE id_coffee = '$id'";
-
-		mysqli_query($db,$sql);
-		header('location:../../index.php?management=coffeedetailsmanagement&pc=add');
+		deletecoffeedetails($id);
 	}
  ?>

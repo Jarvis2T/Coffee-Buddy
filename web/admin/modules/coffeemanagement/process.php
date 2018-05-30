@@ -1,6 +1,6 @@
 <?php 
 	include('../dbcon.php');
-
+	include('../functions.php');
 	$coffeeimg=$_FILES['coffeeimg']['name'];
 	$id=$_GET['id'];
 	$coffeename=$_POST['coffeename'];
@@ -49,29 +49,18 @@
         	echo $e->getMessage();
         }			
 
-		$sql="INSERT INTO coffee (coffeename,coffeeimg,description) VALUES ('$coffeename','$coffeeimg','$description')";
+		addcoffee($coffeename, $coffeeimg, $description);
 
-		mysqli_query($db,$sql);
-		header('location:../../index.php?management=coffeemanagement&pc=add');
 	}elseif (isset($_POST['edit'])) {
 		
 		# edit method
 		
-		if ($coffeeimg!='') {
-			$sql="UPDATE coffee SET coffeename='$coffeename',coffeeimg='$coffeeimg',description='$description' WHERE id_coffee = '$id'";
-		}else{
-			$sql="UPDATE coffee SET coffeename='$coffeename',description='$description' WHERE id_coffee = '$id'";
-		}		
+		editcoffee($coffeename,$coffeeimg,$description,$id);
 
-		mysqli_query($db,$sql);
-		header('location:../../index.php?management=coffeemanagement&pc=edit&id='.$id);
 	}else {
 		
 		# delete method
 		
-		$sql="DELETE FROM coffee WHERE id_coffee = '$id'";
-
-		mysqli_query($db,$sql);
-		header('location:../../index.php?management=coffeemanagement&pc=add');
+		deletecoffee($id);
 	}
  ?>
