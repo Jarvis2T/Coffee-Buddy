@@ -32,7 +32,26 @@
 	
 	if (isset($_POST['add'])) {
 		
-		# add method
+		try {
+			$coffeeimg_tmp=$_FILES['coffeeimg']['tmp_name'];
+
+        	$s3->putObject(
+	            array(
+		            'Bucket' => $bucketName,
+		            'Key' => $keyName,
+		            'SourceFile' => $coffeeimg_tmp,
+		            'ACL' => 'public-read'
+	           	)
+        	);
+        } catch (Exeption $e) {
+        	echo $e->getMessage();
+        }		
+
+        # add method	
+
+		addcoffee($coffeename, $coffeeimg, $description);
+
+	}elseif (isset($_POST['edit'])) {
 		
 		try {
 			$coffeeimg_tmp=$_FILES['coffeeimg']['tmp_name'];
@@ -47,12 +66,8 @@
         	);
         } catch (Exeption $e) {
         	echo $e->getMessage();
-        }			
+        }
 
-		addcoffee($coffeename, $coffeeimg, $description);
-
-	}elseif (isset($_POST['edit'])) {
-		
 		# edit method
 		
 		editcoffee($coffeename,$coffeeimg,$description,$id);
