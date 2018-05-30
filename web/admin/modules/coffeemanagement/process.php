@@ -13,7 +13,7 @@
 	 
 	$coffeeimg=$_FILES['coffeeimg']['name'];
 	
-	$keyName = basename($coffeeimg);
+	
 	#$pathInS3 = 'https://s3.amazonaws.com/' . $bucketName . '/' . $keyName;
 	$bucketName = $_ENV["S3_BUCKET"];
 	$IAM_KEY = $_ENV["AWS_ACCESS_KEY_ID"];
@@ -30,7 +30,7 @@
 	        'region' => 'us-east-1'
 	   		)    
 		);
-
+	$keyName = basename($coffeeimg);
 	if (isset($_POST['add'])) {
 		
 		# upload image to s3
