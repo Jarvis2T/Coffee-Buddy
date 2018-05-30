@@ -14,6 +14,7 @@
 	$coffeeimg=$_FILES['coffeeimg']['name'];
 	
 	$keyName = basename($coffeeimg);
+	#$pathInS3 = 'https://s3.amazonaws.com/' . $bucketName . '/' . $keyName;
 	$bucketName = $_ENV["S3_BUCKET"];
 	$IAM_KEY = $_ENV["AWS_ACCESS_KEY_ID"];
 	$IAM_SECRET = $_ENV["AWS_SECRET_ACCESS_KEY"];
@@ -57,7 +58,7 @@
         } catch (Exeption $e) {
         	echo $e->getMessage();
         }
-	}
+	
         #s3upload($coffeeimg_tmp, $bucketName, $coffeeimg);
 
 		# edit method
