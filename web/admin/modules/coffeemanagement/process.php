@@ -18,7 +18,17 @@
 	$IAM_KEY = $_ENV["AWS_ACCESS_KEY_ID"];
 	$IAM_SECRET = $_ENV["AWS_SECRET_ACCESS_KEY"];
 
-	s3connection($IAM_KEY,$IAM_SECRET);
+	#s3connection($IAM_KEY,$IAM_SECRET);
+	$s3 = S3Client::factory(
+	    	array(
+	        	'credentials' => array(
+	            'key' => $IAM_KEY,
+	            'secret' => $IAM_SECRET
+	        	),
+	        'version' => 'latest',
+	        'region' => 'us-east-1'
+	   		)    
+		);
 	
 	if (isset($_POST['add'])) {
 		
