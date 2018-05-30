@@ -3,6 +3,9 @@
 										# Connect to S3 service function
 										
 	function s3connection($IAM_KEY,$IAM_SECRET){
+		include('../../../vendor/autoload.php');
+		use Aws\S3\S3Client;
+		use Aws\S3\Exception\S3Exception;
 		$s3 = S3Client::factory(
 	    	array(
 	        	'credentials' => array(
@@ -18,6 +21,9 @@
 										# Upload images to S3 funtion
 										
 	function s3upload($coffeeimg_tmp,$bucketName,$coffeeimg){
+		include('../../../vendor/autoload.php');
+		use Aws\S3\S3Client;
+		use Aws\S3\Exception\S3Exception;
 		try {
 			$keyName_tmp=$coffeeimg_tmp;
 
