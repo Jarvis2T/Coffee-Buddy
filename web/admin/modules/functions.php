@@ -20,7 +20,7 @@
 
 										# Upload images to S3 funtion
 										
-	function s3upload($coffeeimg_tmp,$bucketName,$coffeeimg){
+	function s3upload($coffeeimg_tmp,$bucketName,$keyName){
 		include('../../../vendor/autoload.php');
 		use Aws\S3\S3Client;
 		use Aws\S3\Exception\S3Exception;
@@ -30,7 +30,7 @@
         	$s3->putObject(
 	            array(
 		            'Bucket' => $bucketName,
-		            'Key' => $coffeeimg,
+		            'Key' => $keyName,
 		            'SourceFile' => $keyName_tmp,
 		            'ACL' => 'public-read'
 	           	)

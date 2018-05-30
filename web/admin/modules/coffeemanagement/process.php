@@ -24,7 +24,7 @@
 		
 		# upload image to s3
 		
-        s3upload($coffeeimg_tmp, $bucketName, $coffeeimg);
+        #s3upload($coffeeimg_tmp, $bucketName, $coffeeimg);
 
         # add method	
 
@@ -33,8 +33,22 @@
 	}elseif (isset($_POST['edit'])) {
 		
 		# upload image to s3
-		
-        s3upload($coffeeimg_tmp, $bucketName, $coffeeimg);
+		try {
+			$keyName_tmp=$coffeeimg_tmp;
+
+        	$s3->putObject(
+	            array(
+		            'Bucket' => $bucketName,
+		            'Key' => $coffeeimg,
+		            'SourceFile' => $keyName_tmp,
+		            'ACL' => 'public-read'
+	           	)
+        	);
+        } catch (Exeption $e) {
+        	echo $e->getMessage();
+        }
+	}
+        #s3upload($coffeeimg_tmp, $bucketName, $coffeeimg);
 
 		# edit method
 		
