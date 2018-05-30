@@ -2,6 +2,7 @@
 	include('../dbcon.php');
 	include('../functions.php');
 	$coffeeimg=basename($_FILES['coffeeimg']['name']);
+	$coffeeimg_tmp=$_FILES['coffeeimg']['tmp_name'];
 	$id=$_GET['id'];
 	$coffeename=$_POST['coffeename'];
 	$description=$_POST['description'];
@@ -26,14 +27,11 @@
 	   		)    
 		);
 
-	#$keyName = basename($coffeeimg);
-	#$pathInS3 = 'https://s3.amazonaws.com/' . $bucketName . '/' . $keyName;
-
 	
 	if (isset($_POST['add'])) {
 		
 		try {
-			$coffeeimg_tmp=$_FILES['coffeeimg']['tmp_name'];
+			
 
         	$s3->putObject(
 	            array(
@@ -54,7 +52,7 @@
 	}elseif (isset($_POST['edit'])) {
 		
 		try {
-			$coffeeimg_tmp=$_FILES['coffeeimg']['tmp_name'];
+		
 
         	$s3->putObject(
 	            array(
