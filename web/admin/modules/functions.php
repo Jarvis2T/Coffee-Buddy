@@ -2,7 +2,7 @@
 
 										# Connect to S3 service function
 										
-	function s3connection(){
+	/*function s3connection(){
 		include('../../../vendor/autoload.php');
 		use Aws\S3\S3Client;
 		use Aws\S3\Exception\S3Exception;
