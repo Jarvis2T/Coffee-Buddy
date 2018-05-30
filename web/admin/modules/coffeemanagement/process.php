@@ -27,7 +27,7 @@
 		);
 
 	#$keyName = basename($coffeeimg);
-	#$pathInS3 = 'https://s3.amazonaws.com/' . $bucketName . '/' . $keyName;
+	$pathInS3 = 'https://s3.amazonaws.com/' . $bucketName . '/' . $keyName;
 
 	
 	if (isset($_POST['add'])) {
