@@ -2,15 +2,15 @@
 
 										# Connect to S3 service function
 										
-	function s3connection($IAM_KEY,$IAM_SECRET){
+	function s3connection(){
 		include('../../../vendor/autoload.php');
 		use Aws\S3\S3Client;
 		use Aws\S3\Exception\S3Exception;
 		$s3 = S3Client::factory(
 	    	array(
 	        	'credentials' => array(
-	            'key' => $IAM_KEY,
-	            'secret' => $IAM_SECRET
+	            'key' => $_ENV["AWS_ACCESS_KEY_ID"],
+	            'secret' => $_ENV["AWS_SECRET_ACCESS_KEY"]
 	        	),
 	        'version' => 'latest',
 	        'region' => 'us-east-1'

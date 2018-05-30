@@ -17,7 +17,7 @@
 	$IAM_KEY = $_ENV["AWS_ACCESS_KEY_ID"];
 	$IAM_SECRET = $_ENV["AWS_SECRET_ACCESS_KEY"];
 
-	s3connection($IAM_KEY, $IAM_SECRET);
+	s3connection();
 
 	
 	if (isset($_POST['add'])) {
