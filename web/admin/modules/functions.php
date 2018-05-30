@@ -1,6 +1,40 @@
 <?php 
-	
-										// Coffee management functions
+
+										# Connect to S3 service function
+										
+	function s3connection($IAM_KEY,$IAM_SECRET){
+		$s3 = S3Client::factory(
+	    	array(
+	        	'credentials' => array(
+	            'key' => $IAM_KEY,
+	            'secret' => $IAM_SECRET
+	        	),
+	        'version' => 'latest',
+	        'region' => 'us-east-1'
+	   		)    
+		);
+	}
+
+										# Upload images to S3 funtion
+										
+	function s3upload($coffeeimg_tmp,$bucketName,$coffeeimg){
+		try {
+			$keyName_tmp=$coffeeimg_tmp;
+
+        	$s3->putObject(
+	            array(
+		            'Bucket' => $bucketName,
+		            'Key' => $coffeeimg,
+		            'SourceFile' => $keyName_tmp,
+		            'ACL' => 'public-read'
+	           	)
+        	);
+        } catch (Exeption $e) {
+        	echo $e->getMessage();
+        }
+	}
+
+										# Coffee management functions
 										 
 	function addcoffee($coffeename,$coffeeimg,$description){
 		include('dbcon.php');
@@ -30,7 +64,7 @@
 		header('location:../../index.php?management=coffeemanagement&pc=add');
 	}
 
-										// Coffee details management functions
+										# Coffee details management functions
 
 	function addcoffeedetails($id_coffee,$pretime,$difficulty,$ingredient1,$ingredient2,$extra,$instruction1,$instruction2){
 		include('dbcon.php');
