@@ -1,6 +1,6 @@
 <?php 
 	include('../dbcon.php');
-	
+	include('../functions.php');
 	
 	$id=$_GET['id'];
 	$coffeename=$_POST['coffeename'];
@@ -17,7 +17,7 @@
 	$IAM_KEY = $_ENV["AWS_ACCESS_KEY_ID"];
 	$IAM_SECRET = $_ENV["AWS_SECRET_ACCESS_KEY"];
 
-	
+	s3connection($IAM_KEY, $IAM_SECRET);
 
 	
 	if (isset($_POST['add'])) {
@@ -40,8 +40,7 @@
 		addcoffee($coffeename, $coffeeimg, $description);
 
 	}elseif (isset($_POST['edit'])) {
-		include('../functions.php');
-		s3connection($IAM_KEY, $IAM_SECRET);
+		
 		try {
         	$s3->putObject(
 	            array(
