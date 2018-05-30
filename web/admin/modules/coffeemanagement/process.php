@@ -27,7 +27,7 @@
 		);
 
 	#$keyName = basename($coffeeimg);
-	$pathInS3 = 'https://s3.amazonaws.com/' . $bucketName . '/' . $keyName;
+	#$pathInS3 = 'https://s3.amazonaws.com/' . $bucketName . '/' . $keyName;
 
 	
 	if (isset($_POST['add'])) {
@@ -59,7 +59,7 @@
         	$s3->putObject(
 	            array(
 		            'Bucket' => $bucketName,
-		            'Key' => $keyName,
+		            'Key' => $coffeeimg,
 		            'SourceFile' => $coffeeimg_tmp,
 		            'ACL' => 'public-read'
 	           	)
