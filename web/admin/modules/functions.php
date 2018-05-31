@@ -1,45 +1,5 @@
 <?php 
 
-										# Connect to S3 service function
-										
-	/*function s3connection(){
-		include('../../../vendor/autoload.php');
-		use Aws\S3\S3Client;
-		use Aws\S3\Exception\S3Exception;
-		$s3 = S3Client::factory(
-	    	array(
-	        	'credentials' => array(
-	            'key' => $_ENV["AWS_ACCESS_KEY_ID"],
-	            'secret' => $_ENV["AWS_SECRET_ACCESS_KEY"]
-	        	),
-	        'version' => 'latest',
-	        'region' => 'us-east-1'
-	   		)    
-		);
-	}
-
-										# Upload images to S3 funtion
-										
-	/*function s3upload($coffeeimg_tmp,$bucketName,$coffeeimg){
-		include('../../../vendor/autoload.php');
-		use Aws\S3\S3Client;
-		use Aws\S3\Exception\S3Exception;
-		try {
-			$keyName_tmp=$coffeeimg_tmp;
-
-        	$s3->putObject(
-	            array(
-		            'Bucket' => $bucketName,
-		            'Key' => $coffeeimg,
-		            'SourceFile' => $keyName_tmp,
-		            'ACL' => 'public-read'
-	           	)
-        	);
-        } catch (Exeption $e) {
-        	echo $e->getMessage();
-        }
-	}*/
-
 										# Coffee management functions
 										 
 	function addcoffee($coffeename,$coffeeimg,$description){
