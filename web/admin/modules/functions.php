@@ -1,5 +1,20 @@
 <?php 
 
+										# Upload images to s3
+	function s3upload($s3,$bucketName,$coffeeimg,$coffeeimg_tmp){
+		try {
+        	$s3->putObject(
+	            array(
+		            'Bucket' => $bucketName,
+		            'Key' => $coffeeimg,
+		            'SourceFile' => $coffeeimg_tmp,
+		            'ACL' => 'public-read'
+	           	)
+        	);
+        } catch (Exeption $e) {
+        	echo $e->getMessage();
+        }
+	}
 										# Coffee management functions
 										 
 	function addcoffee($coffeename,$coffeeimg,$description){

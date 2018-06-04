@@ -50,18 +50,7 @@
 
 	}elseif (isset($_POST['edit'])) {
 		
-		try {
-        	$s3->putObject(
-	            array(
-		            'Bucket' => $bucketName,
-		            'Key' => $coffeeimg,
-		            'SourceFile' => $coffeeimg_tmp,
-		            'ACL' => 'public-read'
-	           	)
-        	);
-        } catch (Exeption $e) {
-        	echo $e->getMessage();
-        }
+		s3upload($s3, $bucketName, $coffeeimg, $coffeeimg_tmp)
 
 		# edit method
 		
