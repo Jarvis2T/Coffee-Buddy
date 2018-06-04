@@ -17,7 +17,7 @@
 	$IAM_KEY = $_ENV["AWS_ACCESS_KEY_ID"];
 	$IAM_SECRET = $_ENV["AWS_SECRET_ACCESS_KEY"];
 
-	$s3 = S3Client::factory(
+	/*$s3 = S3Client::factory(
 	    	array(
 	        	'credentials' => array(
 	            'key' => $IAM_KEY,
@@ -26,12 +26,12 @@
 	        'version' => 'latest',
 	        'region' => 'us-east-1'
 	   		)    
-		);
+		);*/
 
 	
 	if (isset($_POST['add'])) {
 		
-		try {
+		/*try {
         	$s3->putObject(
 	            array(
 		            'Bucket' => $bucketName,
@@ -42,15 +42,15 @@
         	);
         } catch (Exeption $e) {
         	echo $e->getMessage();
-        }		
-
+        }*/		
+        s3upload($IAM_KEY,$IAM_SECRET,$bucketName,$coffeeimg,$coffeeimg_tmp);
         # add method	
 
 		addcoffee($coffeename, $coffeeimg, $description);
 
 	}elseif (isset($_POST['edit'])) {
 		
-		s3upload($s3, $bucketName, $coffeeimg, $coffeeimg_tmp)
+		s3upload($IAM_KEY,$IAM_SECRET,$bucketName,$coffeeimg,$coffeeimg_tmp);
 
 		# edit method
 		

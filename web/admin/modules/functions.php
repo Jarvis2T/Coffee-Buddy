@@ -1,7 +1,21 @@
 <?php 
 
 										# Upload images to s3
-	function s3upload($s3,$bucketName,$coffeeimg,$coffeeimg_tmp){
+	function s3upload($IAM_KEY,$IAM_SECRET,$bucketName,$coffeeimg,$coffeeimg_tmp){
+		include('../../../vendor/autoload.php');
+		use Aws\S3\S3Client;
+		use Aws\S3\Exception\S3Exception;
+
+		$s3 = S3Client::factory(
+	    	array(
+	        	'credentials' => array(
+	            'key' => $IAM_KEY,
+	            'secret' => $IAM_SECRET
+	        	),
+	        'version' => 'latest',
+	        'region' => 'us-east-1'
+	   		)    
+		);
 		try {
         	$s3->putObject(
 	            array(
