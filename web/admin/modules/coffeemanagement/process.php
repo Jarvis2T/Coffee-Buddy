@@ -49,24 +49,26 @@
 		addcoffee($coffeename, $coffeeimg, $description);
 
 	}elseif (isset($_POST['edit'])) {
-		
-		try {
-        	$s3->putObject(
-	            array(
-		            'Bucket' => $bucketName,
-		            'Key' => $coffeeimg,
-		            'SourceFile' => $coffeeimg_tmp,
-		            'ACL' => 'public-read'
-	           	)
-        	);
-        } catch (Exeption $e) {
-        	echo $e->getMessage();
-        }
+		if ($coffeeimg!='') {
+			try {
+        		$s3->putObject(
+	            	array(
+		            	'Bucket' => $bucketName,
+		            	'Key' => $coffeeimg,
+		            	'SourceFile' => $coffeeimg_tmp,
+		            	'ACL' => 'public-read'
+	           		)
+        		);
+        	} catch (Exeption $e) {
+        		echo $e->getMessage();
+        	}
 
-		# edit method
+			# edit method
 		
-		editcoffee($coffeename,$coffeeimg,$description,$id);
-
+			editcoffee($coffeename,$coffeeimg,$description,$id);
+		}else{
+			editcoffee($coffeename,$coffeeimg,$description,$id);
+		}
 	}else {
 		
 		# delete method
