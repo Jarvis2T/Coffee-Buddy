@@ -11,21 +11,21 @@
 	use Aws\S3\S3Client;
 	use Aws\S3\Exception\S3Exception;
 
-	$coffeeimg=basename($_FILES['coffeeimg']['name']);
-	$coffeeimg_tmp=$_FILES['coffeeimg']['tmp_name'];
-	$bucketName = $_ENV["S3_BUCKET"];
-	$IAM_KEY = $_ENV["AWS_ACCESS_KEY_ID"];
-	$IAM_SECRET = $_ENV["AWS_SECRET_ACCESS_KEY"];
+	$coffeeimg=basename($_FILES["coffeeimg"]["name"]);
+	$coffeeimg_tmp=$_FILES["coffeeimg"]["tmp_name"];
+	$bucketName = 'thanh-img2';
+	$IAM_KEY = 'AKIAS22CJWT6D7LR2MWL';
+	$IAM_SECRET = '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';
 
-	$s3 = S3Client::factory(
-	    	array(
-	        	'credentials' => array(
+	$s3 = new S3Client(
+	    	[
+	        	'credentials' => [
 	            'key' => $IAM_KEY,
 	            'secret' => $IAM_SECRET
-	        	),
+	        	],
 	        'version' => 'latest',
 	        'region' => 'us-east-1'
-	   		)    
+	   		]    
 		);
 
 	
@@ -33,12 +33,12 @@
 		if ($coffeeimg!='') {
 			try {
         		$s3->putObject(
-	            	array(
+	            	[
 		            	'Bucket' => $bucketName,
 		            	'Key' => $coffeeimg,
 		            	'SourceFile' => $coffeeimg_tmp,
 		            	'ACL' => 'public-read'
-	           		)
+	           		]
         		);
         	} catch (Exeption $e) {
         		echo $e->getMessage();
@@ -54,12 +54,12 @@
 		if ($coffeeimg!='') {
 			try {
         		$s3->putObject(
-	            	array(
+	            	[
 		            	'Bucket' => $bucketName,
 		            	'Key' => $coffeeimg,
 		            	'SourceFile' => $coffeeimg_tmp,
 		            	'ACL' => 'public-read'
-	           		)
+	           		]
         		);
         	} catch (Exeption $e) {
         		echo $e->getMessage();
