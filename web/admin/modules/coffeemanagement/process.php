@@ -13,9 +13,9 @@
 
 	$coffeeimg=basename($_FILES["coffeeimg"]["name"]);
 	$coffeeimg_tmp=$_FILES["coffeeimg"]["tmp_name"];
-	$bucketName = 'thanh-img2';
-	$IAM_KEY = 'AKIAS22CJWT6D7LR2MWL';
-	$IAM_SECRET = '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';
+	$bucketName = 'S3_BUCKET';
+	$IAM_KEY = 'IAM_KEY';
+	$IAM_SECRET = 'SECRET_KEY';
 
 	$s3 = new S3Client(
 	    	[
